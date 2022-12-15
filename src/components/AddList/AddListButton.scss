@@ -1,0 +1,46 @@
+.add-list {
+    &__popup {
+        width: 240px;
+       height: 150px;
+       background: #ffffff;
+       box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);
+       border-radius: 10px;
+       padding: 18px; 
+       box-sizing: border-box;
+       position: relative;
+       top: -25px;
+       left: 10px;
+
+       .button {
+        width: 100%;
+        margin-top: 15px;
+       }
+
+       &-close-svg {
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        cursor: pointer;
+        background: rgb(165, 164, 164);
+        border-radius: 12px;
+        padding: 3px;
+       }
+
+       &-colors {
+        margin-top: 12px;
+        display: flex;
+        justify-content: space-between;
+
+            .badge {
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+                border: 2px solid transparent;
+
+                &.active {
+                    border: 2px solid #525252;
+                }
+            }
+        }
+    }
+}
