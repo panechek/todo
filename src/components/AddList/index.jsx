@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+
 import List from "../List";
 import Badge from "../Badge";
 
@@ -8,8 +10,15 @@ import './AddListButton.scss';
 
 const AddList = ({ colors, onAddList }) => {
     const [visiblePopup, setVisiblePopup] = React.useState(false);
-    const [selectedColor, selectColor] = React.useState(colors[0].id);
+    const [selectedColor, selectColor] = React.useState(1);
+    const [isloading, setIsLoading] = React.useState(false);
     const [inputValue, setInputValue] = React.useState('');
+
+    React.useEffect(() => {
+        if (Array.isArray(colors)) {
+            selectColor(colors[0].id)
+        }
+    }, [colors]);
 
     const onClose = () => {
         setVisiblePopup(false);
@@ -22,9 +31,19 @@ const AddList = ({ colors, onAddList }) => {
             alert('Введите название списка');
             return;
         }
+        setIsLoading(true);
+        axios.post('http://localhost:3001/lists', { 
+            name: inputValue, 
+            colorId: selectedColor 
+        }).then(({ data }) => {
         const color = colors.filter(i => i.id === selectedColor)[0].name;
-        onAddList({ id: Math.random(), name: inputValue, color });
+        const listObj = { ...data, color: {name: color}};
+        onAddList(listObj);
         onClose();
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
     };
 
     return (
@@ -78,7 +97,9 @@ const AddList = ({ colors, onAddList }) => {
                 <button 
                     className="button"
                     onClick={addList}
-                >Добавить</button>
+                >
+                    {isloading ? 'Добавление...' : 'Добавить'}
+                </button>
             </div>}
         </div>
     )
