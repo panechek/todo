@@ -1,33 +1,62 @@
+import axios from 'axios';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+
 import penSvg from '../../assets/img/pen.svg';
 
 import './Tasks.scss';
+import AddTaskForm from './AddTaskForm';
+import Task from './Task';
 
-const Tasks = ({ lists }) => {
+const Tasks = ({ 
+    list, 
+    onEditTitle, 
+    onAddTask, 
+    onRemoveTask,
+    onEditTask,
+    onCompleteTask,
+    withoutEmpty }) => {
+
+    const editTitle = () => {
+        const newTitle = window.prompt('Название списка', list.name);
+        if (newTitle) {
+            onEditTitle(list.id, newTitle);
+            axios.patch('http://localhost:3001/lists/' + list.id, {
+                name: newTitle
+            })
+            .catch(() => {
+                alert('Не удалось обновить название списка');
+            });
+        }
+    };
+
     return (
         <div className="tasks">
-            <h2 className="tasks__title">
-               {lists.name}
-                <img src={penSvg} alt="edit icon" />
-            </h2>
-            <div className='tasks__items'>
-                {lists.tasks.map((task) => (
-                    <div key={task.id} className="tasks__items-row">
-                    <div className="checkbox">
-                        <input id={`task-${task.id}`} type="checkbox" />
-                        <label htmlFor={`task-${task.id}`}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-check-lg" viewBox="0 0 16 16">
-                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                            </svg>
-                        </label>
-                    </div>
-                    <input value={task.text} readOnly />
-                </div>
-                ))}
-                
-            </div>
-        </div>
-    )
+            <NavLink to={`/lists/${list.id}`}>
+                <h2 style={{ color: list.color.hex }} className="tasks__title">
+                    {list.name}
+                    <img onClick={editTitle} src={penSvg} alt="Edit icon" />
+                </h2>
+            </NavLink>
+            <div className="tasks__items">
+        {!withoutEmpty && list.tasks && !list.tasks.length && (
+          <h2>Задачи отсутствуют</h2>
+        )}
+        {list.tasks &&
+          list.tasks.map(task => (
+            <Task
+              key={task.id}
+              list={list}
+              onEdit={onEditTask}
+              onRemove={onRemoveTask}
+              onComplete={onCompleteTask}
+              {...task}
+            />
+          ))}
+        <AddTaskForm key={list.id} list={list} onAddTask={onAddTask} />
+      </div>
+    </div>
+  );
 };
 
 export default Tasks;

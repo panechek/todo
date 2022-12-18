@@ -14,6 +14,11 @@
       "id": 5,
       "name": "Здоровье",
       "colorId": 1
+    },
+    {
+      "name": "спорт",
+      "colorId": 6,
+      "id": 6
     }
   ],
   "tasks": [
@@ -40,6 +45,30 @@
       "listId": 2,
       "text": "Учебники",
       "completed": true
+    },
+    {
+      "listId": 6,
+      "text": "отжимания",
+      "completed": false,
+      "id": 9
+    },
+    {
+      "listId": 1,
+      "text": "sdfsdf",
+      "completed": false,
+      "id": 10
+    },
+    {
+      "listId": 2,
+      "text": "fff",
+      "completed": false,
+      "id": 11
+    },
+    {
+      "listId": 1,
+      "text": "ghjg",
+      "completed": false,
+      "id": 12
     }
   ],
   "colors": [
