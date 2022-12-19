@@ -16,7 +16,7 @@
       "colorId": 1
     },
     {
-      "name": "спорт",
+      "name": "Спорт",
       "colorId": 6,
       "id": 6
     }
@@ -38,7 +38,7 @@
       "id": 3,
       "listId": 2,
       "text": "Театр",
-      "completed": false
+      "completed": true
     },
     {
       "id": 4,
@@ -69,6 +69,12 @@
       "text": "ghjg",
       "completed": false,
       "id": 12
+    },
+    {
+      "listId": 5,
+      "text": "Стоматолог",
+      "completed": false,
+      "id": 13
     }
   ],
   "colors": [
