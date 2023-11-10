@@ -19,6 +19,11 @@
       "name": "Спорт",
       "colorId": 6,
       "id": 6
+    },
+    {
+      "name": "kjkl",
+      "colorId": 3,
+      "id": 7
     }
   ],
   "tasks": [
