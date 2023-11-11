@@ -1,85 +1,45 @@
 {
   "lists": [
     {
-      "id": 1,
-      "name": "Покупки",
-      "colorId": 5
-    },
-    {
-      "id": 2,
-      "name": "Школа",
-      "colorId": 4
-    },
-    {
-      "id": 5,
-      "name": "Здоровье",
-      "colorId": 1
-    },
-    {
-      "name": "Спорт",
+      "name": "dsds",
       "colorId": 6,
-      "id": 6
+      "id": 1
     },
     {
-      "name": "kjkl",
+      "name": "sdsd",
       "colorId": 3,
-      "id": 7
+      "id": 2
+    },
+    {
+      "name": "cxc",
+      "colorId": 4,
+      "id": 3
     }
   ],
   "tasks": [
     {
-      "id": 1,
       "listId": 2,
-      "text": "Домашнее задание",
-      "completed": true
-    },
-    {
-      "id": 2,
-      "listId": 2,
-      "text": "Доклад",
-      "completed": true
-    },
-    {
-      "id": 3,
-      "listId": 2,
-      "text": "Театр",
-      "completed": true
-    },
-    {
-      "id": 4,
-      "listId": 2,
-      "text": "Учебники",
-      "completed": true
-    },
-    {
-      "listId": 6,
-      "text": "отжимания",
+      "text": "dddd",
       "completed": false,
-      "id": 9
-    },
-    {
-      "listId": 1,
-      "text": "sdfsdf",
-      "completed": false,
-      "id": 10
+      "id": 4
     },
     {
       "listId": 2,
-      "text": "fff",
+      "text": "ddd",
       "completed": false,
-      "id": 11
+      "id": 5
     },
     {
-      "listId": 1,
-      "text": "ghjg",
+      "listId": 3,
+      "text": "xcxc",
       "completed": false,
-      "id": 12
+      "id": 6
     },
     {
-      "listId": 5,
-      "text": "Стоматолог",
+      "listId": 2,
+      "text": "xzxz",
       "completed": false,
-      "id": 13
+      "id": 7
     }
   ],
   "colors": [

@@ -25,7 +25,9 @@ const AddTaskForm = ({onAddTask, list}) => {
             setInputValue('');
             toggleFormVisible();
         })
-        .catch(() => {
+        .catch((e) => {
+            console.log(e);
+
             alert('Ошибка при добавлении задачи')
         })
         .finally(() => {

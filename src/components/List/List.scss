@@ -1,4 +1,5 @@
 .list {
+  overflow: auto;
   $self: &;
 
   margin-bottom: 30px;

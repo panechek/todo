@@ -30,7 +30,6 @@ function App() {
     const newList = lists.filter((list) => list.id !== id);
     setLists(newList);
   };
-
   const onEditTitle = (id, title) => {
     const newList = lists.map((item) => {
       if (item.id === id) {
@@ -40,8 +39,8 @@ function App() {
     })
     setLists(newList);
   };
-
   const onAddTask = (listId, taskObj) => {
+    
     const newList = lists.map(item => {
       if (item.id === listId) {
         item.tasks = [...item.tasks, taskObj];
@@ -128,7 +127,8 @@ function App() {
   return (
     <div className="todo">
       <div className="todo__sidebar">
-        <List 
+         
+       <List 
         onClickItem={
           () => {navigate(`/`)}
         }
@@ -153,6 +153,7 @@ function App() {
             name: "Все задачи",
           },
         ]} />
+        <div className="todo__list">
         {lists ? (<List 
           items={lists}
           onRemove={onRemoveList}
@@ -165,11 +166,12 @@ function App() {
         />) : (
           'Загрузка...'
         )}
+        </div>
         <AddList 
           colors={colors}
           onAddList={onAddList}  
-        />
-      </div>
+        /></div>
+      
       <div className="todo__tasks">
         <Routes>
         <Route exact path="/" element=
