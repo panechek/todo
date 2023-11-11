@@ -5,6 +5,7 @@ import axios from "axios";
 import removeSvg from '../../assets/img/remove.svg';
 import './List.scss'
 import Badge from "../Badge";
+import { JSON_API } from "../../assets/Constants";
 
 const List = ({ 
     items, 
