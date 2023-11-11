@@ -20,15 +20,19 @@
 const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
-const middlewares = jsonServer.defaults();
-const port = process.env.PORT || 3000;
+const middlewares = jsonServer.defaults({
+    static: './build'
+});
+const port = process.env.PORT || 8000;
 
 server.use(middlewares);
 server.use(jsonServer.rewriter({
     '/api/*': '/$1',
-    '/blog/:resource/:id/show': '/:resource/:id'
+    // '/blog/:resource/:id/show': '/:resource/:id'
 }))
 server.use(router);
 
-server.listen(port);
+server.listen(port, () => {
+    console.log('server is runnnninng')
+});
 module.exports = server

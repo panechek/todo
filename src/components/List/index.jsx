@@ -16,7 +16,7 @@ const List = ({
 }) => {
     const removeList = (item) => {
         if (window.confirm('Вы уверены, что хотите удалить?')) {
-            axios.delete('http://localhost:3001/lists/' + item.id).then(() => {
+            axios.delete(`${JSON_API}/lists/` + item.id).then(() => {
                 onRemove(item.id);
             })
         }

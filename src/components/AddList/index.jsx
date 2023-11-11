@@ -7,6 +7,7 @@ import Badge from "../Badge";
 import closeSvg from '../../assets/img/close.svg';
 
 import './AddListButton.scss';
+import { JSON_API } from "../../assets/Constants";
 
 const AddList = ({ colors, onAddList }) => {
     const [visiblePopup, setVisiblePopup] = React.useState(false);
@@ -32,7 +33,7 @@ const AddList = ({ colors, onAddList }) => {
             return;
         }
         setIsLoading(true);
-        axios.post('http://localhost:3001/lists', { 
+        axios.post(`${JSON_API}/lists`, { 
             name: inputValue, 
             colorId: selectedColor 
         }).then(({ data }) => {

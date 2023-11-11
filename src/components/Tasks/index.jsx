@@ -21,7 +21,7 @@ const Tasks = ({
         const newTitle = window.prompt('Название списка', list.name);
         if (newTitle) {
             onEditTitle(list.id, newTitle);
-            axios.patch('http://localhost:3001/lists/' + list.id, {
+            axios.patch(`${JSON_API}/lists/` + list.id, {
                 name: newTitle
             })
             .catch(() => {
