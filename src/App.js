@@ -173,6 +173,7 @@ function App() {
         /></div>
       
       <div className="todo__tasks">
+        <div className="todo__list">
         <Routes>
         <Route exact path="/" element=
           {lists &&
@@ -203,6 +204,7 @@ function App() {
           />)}
        />
         </Routes>
+        </div>
       </div>
     </div>
   );

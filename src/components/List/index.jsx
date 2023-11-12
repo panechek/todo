@@ -24,7 +24,7 @@ const List = ({
     };
 
     return (
-        <ul className="list" onClick={onClick}>
+        <ul className="list todo__sidebar_list" onClick={onClick}>
             {items.map((item, index) => (
                 <li 
                     key={index} 

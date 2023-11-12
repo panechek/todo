@@ -18,10 +18,10 @@ root.render(
   <React.StrictMode>
     <RollbarProvider config={rollbar}>
       <ErrorBoundary>
-    <Router>
-      <App />
-    </Router>
-    </ErrorBoundary>
+        <Router>
+          <App />
+        </Router>
+      </ErrorBoundary>
     </RollbarProvider>
   </React.StrictMode>
 );
