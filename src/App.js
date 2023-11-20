@@ -17,7 +17,6 @@ import {
   removeError as removeListsError
 } from "./redux/listsSlice";
 import burger from './assets/img/burger.svg';
-
 import './scss/index.scss';
 import editServer from "./api";
 import {
@@ -85,7 +84,10 @@ function App() {
           items={[
             {
               active: true,
-              icon: (<img src={burger} alt='Все задачи' />),
+              icon: (<img
+                src={burger}
+                alt='Все задачи'
+                />),
               name: "Все задачи",
              },
           ]}

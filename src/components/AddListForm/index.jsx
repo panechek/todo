@@ -7,7 +7,7 @@ import {
 
 import List from "../List";
 import Badge from "../Badge";
-import closeSvg from '../../assets/img/close.svg';
+import { ReactComponent as CloseSvg } from '../../assets/img/close.svg';
 
 import isValidName from "../../utils/isValidName";
 import { postList } from "../../redux/fetchData";
@@ -67,11 +67,9 @@ const AddListForm = () => {
             ]}
             />
             {visiblePopup && <div className="add-list__popup">
-                <img 
-                    src={closeSvg} 
-                    alt="button close" 
+                <CloseSvg
                     className="add-list__popup-close-svg" 
-                    onClick={onClose} 
+                    onClick={onClose}
                 />
                 <input 
                     className="field" 

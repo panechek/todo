@@ -44,12 +44,13 @@
 
     @include laptop {
       height: 20%;
-      position: absolute;
+      position: fixed;
       width: -webkit-fill-available;
       padding: 10px;
 
       &_list {
-        display: flex
+        display: flex;
+        height: 100%;
       }
     }
   }
@@ -58,6 +59,11 @@
     flex: 1;
     padding: 60px;
     overflow: auto;
+
+    @include laptop {
+      margin-top: 20vh;
+      padding: 60px 10px;
+    }
   }
 
   &__list {
