@@ -43,13 +43,12 @@
     flex-direction: column;
 
     @include laptop {
-      height: 20%;
+      height: auto;
       position: fixed;
       width: -webkit-fill-available;
       padding: 10px;
 
       &_list {
-        display: flex;
         height: 100%;
       }
     }
@@ -61,7 +60,7 @@
     overflow: auto;
 
     @include laptop {
-      margin-top: 20vh;
+      margin-top: 15vh;
       padding: 60px 10px;
     }
   }

@@ -11,34 +11,14 @@
       "colorId": 4
     },
     {
-      "id": 5,
-      "name": "Здоровье",
-      "colorId": 1
-    },
-    {
       "name": "Спорт",
       "colorId": 6,
-      "id": 6
+      "id": 3
     },
     {
-      "name": "Дети",
+      "name": "Здоровье",
       "colorId": 1,
-      "id": 7
-    },
-    {
-      "name": "sdf",
-      "colorId": 1,
-      "id": 8
-    },
-    {
-      "name": "fdff",
-      "colorId": 1,
-      "id": 9
-    },
-    {
-      "name": "nm,",
-      "colorId": 1,
-      "id": 10
+      "id": 4
     }
   ],
   "tasks": [
@@ -74,28 +54,34 @@
       "id": 10
     },
     {
-      "listId": 8,
-      "text": "fdsfds",
-      "completed": true,
-      "id": 11
-    },
-    {
       "listId": 1,
-      "text": "dsf",
+      "text": "Молоко",
       "completed": false,
       "id": 12
     },
     {
-      "listId": 9,
-      "text": "dfsf",
-      "completed": true,
+      "listId": 1,
+      "text": "Хлеб",
+      "completed": false,
       "id": 13
     },
     {
-      "listId": 9,
-      "text": "fds",
-      "completed": true,
+      "listId": 2,
+      "text": "Домашнее задание",
+      "completed": false,
       "id": 14
+    },
+    {
+      "listId": 4,
+      "text": "Витамины",
+      "completed": false,
+      "id": 15
+    },
+    {
+      "listId": 4,
+      "text": "Питание",
+      "completed": false,
+      "id": 16
     }
   ],
   "colors": [

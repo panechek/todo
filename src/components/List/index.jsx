@@ -4,55 +4,59 @@ import { deleteList } from "../../redux/fetchData";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import removeSvg from '../../assets/img/remove.svg';
-import Badge from "../Badge";
+import Badge from "./Badge";
 import Sceleton from "./Sceletons";
-// import { selectors as listsSelectors } from "../../redux/listsSlice";
+import { changeCurrentList } from "../../redux/listsSlice";
+import { selectors as listsSelectors } from "../../redux/listsSlice";
+import { selectors as tasksSelectors } from "../../redux/tasksSlice";
 
-const List = ({ 
-    items, 
-    isRemovable, 
-    onClickItem,
-}) => {
+const List = ({ openMenu, setOpenMenu }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const colors = useSelector((state) => state.lists.colors);
     const getColor = (id) => colors.find((i) => i.id === id).name;
+    const lists = useSelector(listsSelectors.selectAll);
+    const tasks = useSelector(tasksSelectors.selectAll);
     const currentList = useSelector((state) => state.lists.currentList);
     const sceletons = [...new Array(6)].map((_, index) => <Sceleton key={index} />);
 
-    const onRemoveList = async (item) => {
+    const onRemoveList = (id) => {
         if (window.confirm('Вы уверены, что хотите удалить?')) {
-            dispatch(deleteList(item.id));
+            dispatch(deleteList(id));
             navigate('/');
         }
     };
     return (
         <ul className="list todo__sidebar_list">
-            {items.length > 0 ? items.map((item, index) => (
+            {lists.length > 0 ? lists.map((list, index) => (
                 <li 
                     key={index} 
-                    className={classNames(item.className, {
-                        active: item.active 
-                            ? item.active 
-                            : currentList === item.id})}
+                    className={classNames(list.className, {
+                        active: list.active 
+                            ? list.active 
+                            : currentList === list.id,
+                            hidden: openMenu
+                        })}
                 >
                     <i>
-                        {item.icon ? (item.icon) : (<Badge color={getColor(item.colorId)} />)}
+                        <Badge color={getColor(list.colorId)} />
                     </i>
                     <span
-                        onClick={onClickItem ? () => onClickItem(item) : null}
+                        onClick={() => {
+                            dispatch(changeCurrentList(list.id));
+                            setOpenMenu(!openMenu);
+                        }}
                     >
-                        {item.name}
-                        {item.tasks && ` (${item.tasks.length})`}
+                        {list.name}
+                        {` (${tasks.filter((i) => i.listId === list.id).length})`}
                     </span>
-                    {isRemovable && 
                         <img
                             src={removeSvg}
                             alt="remove list" 
                             className="list__remove-icon"
-                            onClick={() => onRemoveList(item)}
-                        />}
+                            onClick={() => onRemoveList(list.id)}
+                            />
                 </li>
             )) : sceletons}
         

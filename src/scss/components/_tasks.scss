@@ -78,6 +78,10 @@
           position: absolute;
           left: 50%;
           top: 50%;
+
+          @include laptop {
+            left: 10px;
+          }
         }
     
         &-row {

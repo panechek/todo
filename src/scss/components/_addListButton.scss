@@ -11,6 +11,11 @@
        top: -25px;
        left: 10px;
 
+        @include laptop {
+            position: fixed;
+            top: 65px;
+        }
+
        .button {
         width: 100%;
         margin-top: 15px;
@@ -24,6 +29,8 @@
         background: rgb(165, 164, 164);
         border-radius: 12px;
         padding: 3px;
+
+      
        }
 
        &-colors {

@@ -51,7 +51,16 @@
 
         @include laptop {
           display: flex;
-          width: 100%;
+        }
+      }
+
+      &.hidden {
+        @include laptop {
+          display: none;
+
+          &.active {
+            display: flex;
+          }
         }
       }
 

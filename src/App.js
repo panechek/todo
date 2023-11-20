@@ -12,23 +12,23 @@ import {
   Tasks
 } from './components';
 import {
-  changeCurrentList,
   selectors as listsSelectors,
   removeError as removeListsError
 } from "./redux/listsSlice";
-import burger from './assets/img/burger.svg';
 import './scss/index.scss';
 import editServer from "./api";
 import {
   removeError as removeTasksError,
   selectors as tasksSelectors
 } from "./redux/tasksSlice";
+import ListTitle from "./components/List/ListTitle";
 
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const lists = useSelector(listsSelectors.selectAll);
   const tasks = useSelector(tasksSelectors.selectAll);
+  const [openMenu, setOpenMenu] = React.useState(true);
 
   const currentList = useSelector((state) => state.lists.currentList);
   const activeList = lists.find((i) => i.id === currentList);
@@ -77,35 +77,11 @@ function App() {
    return (
     <div className="todo">
       <div className="todo__sidebar">
-        <List 
-          onClickItem={() => {
-            dispatch(changeCurrentList(null));
-          }}
-          items={[
-            {
-              active: true,
-              icon: (<img
-                src={burger}
-                alt='Все задачи'
-                />),
-              name: "Все задачи",
-             },
-          ]}
-        />
+        <ListTitle setOpenMenu={() => setOpenMenu(!openMenu)} />
         <div className="todo__list">
-          {lists && (<List 
-            items={lists}
-            onClickItem={
-              list => {
-                dispatch(changeCurrentList(list.id))
-              }
-            }
-            isRemovable
-          />) 
-          }
+          <List openMenu={openMenu} setOpenMenu={setOpenMenu}/>
         </div>
-        <AddListForm
-          />
+        <AddListForm />
       </div>
       <div className="todo__tasks">
         <div className="todo__list">
