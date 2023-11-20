@@ -36,14 +36,17 @@ function App() {
   const listsError = useSelector((state) => state.lists.error);
 
   React.useEffect(() => {
+    const checkData = async () => {
     const savedLists = localStorage.getItem('lists');
-    savedLists && editServer('lists', JSON.parse(savedLists));
+    savedLists && await editServer('lists', JSON.parse(savedLists));
     const savedTasks = localStorage.getItem('tasks');
-    savedTasks && editServer('tasks', JSON.parse(savedTasks));
+    savedTasks && await editServer('tasks', JSON.parse(savedTasks));
     localStorage.removeItem('lists');
     localStorage.removeItem('tasks');
-
-    dispatch(fetchData());
+    await dispatch(fetchData());
+  } 
+  checkData();
+  
     // eslint-disable-next-line
   }, []);
   React.useEffect(() => {
