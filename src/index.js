@@ -3,9 +3,10 @@ import Rollbar from 'rollbar';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ErrorBoundary, Provider as RollbarProvider } from '@rollbar/react';
+import { Provider } from 'react-redux';
 import App from './App';
 
-import './index.scss';
+import { store } from './redux/store';
 
 const rollbarConfig = {
   accessToken: 'c924523187754829a4d2eb0ba9b392d4',
@@ -18,9 +19,11 @@ root.render(
   <React.StrictMode>
     <RollbarProvider config={rollbar}>
       <ErrorBoundary>
-        <Router>
-          <App />
-        </Router>
+        <Provider store={store}>
+          <Router>
+            <App />
+          </Router>
+        </Provider>
       </ErrorBoundary>
     </RollbarProvider>
   </React.StrictMode>

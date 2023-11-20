@@ -1,43 +1,48 @@
 import React from "react";
 import classNames from "classnames";
-import axios from "axios";
-
+import { deleteList } from "../../redux/fetchData";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import removeSvg from '../../assets/img/remove.svg';
-import './List.scss'
 import Badge from "../Badge";
-import { JSON_API } from "../../assets/Constants";
+import Sceleton from "./Sceletons";
+// import { selectors as listsSelectors } from "../../redux/listsSlice";
 
 const List = ({ 
     items, 
     isRemovable, 
-    onClick, 
-    onRemove, 
-    onClickItem, 
-    activeItem 
+    onClickItem,
 }) => {
-    const removeList = (item) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const colors = useSelector((state) => state.lists.colors);
+    const getColor = (id) => colors.find((i) => i.id === id).name;
+    const currentList = useSelector((state) => state.lists.currentList);
+    const sceletons = [...new Array(6)].map((_, index) => <Sceleton key={index} />);
+
+    const onRemoveList = async (item) => {
         if (window.confirm('Вы уверены, что хотите удалить?')) {
-            axios.delete(`${JSON_API}/lists/` + item.id).then(() => {
-                onRemove(item.id);
-            })
+            dispatch(deleteList(item.id));
+            navigate('/');
         }
     };
-
     return (
-        <ul className="list todo__sidebar_list" onClick={onClick}>
-            {items.map((item, index) => (
+        <ul className="list todo__sidebar_list">
+            {items.length > 0 ? items.map((item, index) => (
                 <li 
                     key={index} 
                     className={classNames(item.className, {
                         active: item.active 
                             ? item.active 
-                            : activeItem && activeItem.id === item.id})}
-                    onClick={onClickItem ? () => onClickItem(item) : null}
+                            : currentList === item.id})}
                 >
                     <i>
-                        {item.icon ? (item.icon) : (<Badge color={item.color.name} />)}
+                        {item.icon ? (item.icon) : (<Badge color={getColor(item.colorId)} />)}
                     </i>
-                    <span>
+                    <span
+                        onClick={onClickItem ? () => onClickItem(item) : null}
+                    >
                         {item.name}
                         {item.tasks && ` (${item.tasks.length})`}
                     </span>
@@ -46,10 +51,10 @@ const List = ({
                             src={removeSvg}
                             alt="remove list" 
                             className="list__remove-icon"
-                            onClick={() => removeList(item)}
+                            onClick={() => onRemoveList(item)}
                         />}
                 </li>
-            ))}
+            )) : sceletons}
         
          </ul>
     )

@@ -1,127 +1,115 @@
 {
-    "lists": [
-      {
-        "id": 1,
-        "name": "Покупки",
-        "colorId": 5
-      },
-      {
-        "id": 2,
-        "name": "Школа",
-        "colorId": 4
-      },
-      {
-        "id": 5,
-        "name": "Здоровье",
-        "colorId": 1
-      },
-      {
-        "name": "Спорт",
-        "colorId": 6,
-        "id": 6
-      },
-      {
-        "name": "kjkl",
-        "colorId": 3,
-        "id": 7
-      }
-    ],
-    "tasks": [
-      {
-        "id": 1,
-        "listId": 2,
-        "text": "Домашнее задание",
-        "completed": true
-      },
-      {
-        "id": 2,
-        "listId": 2,
-        "text": "Доклад",
-        "completed": true
-      },
-      {
-        "id": 3,
-        "listId": 2,
-        "text": "Театр",
-        "completed": true
-      },
-      {
-        "id": 4,
-        "listId": 2,
-        "text": "Учебники",
-        "completed": true
-      },
-      {
-        "listId": 6,
-        "text": "отжимания",
-        "completed": false,
-        "id": 9
-      },
-      {
-        "listId": 1,
-        "text": "sdfsdf",
-        "completed": false,
-        "id": 10
-      },
-      {
-        "listId": 2,
-        "text": "fff",
-        "completed": false,
-        "id": 11
-      },
-      {
-        "listId": 1,
-        "text": "ghjg",
-        "completed": false,
-        "id": 12
-      },
-      {
-        "listId": 5,
-        "text": "Стоматолог",
-        "completed": false,
-        "id": 13
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "hex": "#C9D1D3",
-        "name": "grey"
-      },
-      {
-        "id": 2,
-        "hex": "#42B883",
-        "name": "green"
-      },
-      {
-        "id": 3,
-        "hex": "#64C4ED",
-        "name": "blue"
-      },
-      {
-        "id": 4,
-        "hex": "#FFBBCC",
-        "name": "pink"
-      },
-      {
-        "id": 5,
-        "hex": "#B6E6BD",
-        "name": "lime"
-      },
-      {
-        "id": 6,
-        "hex": "#C355F5",
-        "name": "purple"
-      },
-      {
-        "id": 7,
-        "hex": "#110133",
-        "name": "black"
-      },
-      {
-        "id": 8,
-        "hex": "#FF6464",
-        "name": "red"
-      }
-    ]
-  }
+  "lists": [
+    {
+      "id": 1,
+      "name": "Покупки",
+      "colorId": 5
+    },
+    {
+      "id": 2,
+      "name": "Школа",
+      "colorId": 4
+    },
+    {
+      "id": 5,
+      "name": "Здоровье",
+      "colorId": 1
+    },
+    {
+      "name": "Спорт",
+      "colorId": 6,
+      "id": 6
+    },
+    {
+      "name": "Дети",
+      "colorId": 1,
+      "id": 7
+    },
+    {
+      "name": "sdf",
+      "colorId": 1,
+      "id": 8
+    }
+  ],
+  "tasks": [
+    {
+      "id": 2,
+      "listId": 2,
+      "text": "Доклад",
+      "completed": true
+    },
+    {
+      "id": 1,
+      "name": "Покупки",
+      "colorId": 5
+    },
+    {
+      "id": 5,
+      "name": "Здоровье",
+      "colorId": 1
+    },
+    {
+      "name": "Спорт",
+      "colorId": 6,
+      "id": 6
+    },
+    {
+      "name": "Дети",
+      "colorId": 1,
+      "id": 7
+    },
+    {
+      "name": "bnm",
+      "colorId": 1,
+      "id": 10
+    },
+    {
+      "listId": 8,
+      "text": "fdsfds",
+      "completed": true,
+      "id": 11
+    }
+  ],
+  "colors": [
+    {
+      "id": 1,
+      "hex": "#C9D1D3",
+      "name": "grey"
+    },
+    {
+      "id": 2,
+      "hex": "#42B883",
+      "name": "green"
+    },
+    {
+      "id": 3,
+      "hex": "#64C4ED",
+      "name": "blue"
+    },
+    {
+      "id": 4,
+      "hex": "#FFBBCC",
+      "name": "pink"
+    },
+    {
+      "id": 5,
+      "hex": "#B6E6BD",
+      "name": "lime"
+    },
+    {
+      "id": 6,
+      "hex": "#C355F5",
+      "name": "purple"
+    },
+    {
+      "id": 7,
+      "hex": "#110133",
+      "name": "black"
+    },
+    {
+      "id": 8,
+      "hex": "#FF6464",
+      "name": "red"
+    }
+  ]
+}

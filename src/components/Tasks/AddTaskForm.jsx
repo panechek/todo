@@ -1,38 +1,41 @@
 import React from 'react';
-import axios from 'axios';
 import addSvg from '../../assets/img/add.svg';
-import { JSON_API } from '../../assets/Constants';
+import { selectors as tasksSelectors } from '../../redux/tasksSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import isValidName from '../../utils/isValidName';
+import { postTask } from '../../redux/fetchData';
 
-const AddTaskForm = ({onAddTask, list}) => {
+const AddTaskForm = ({ list }) => {
     const [visibleForm, setVisibleForm] = React.useState(false);
     const [inputValue, setInputValue] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
-
+    const dispatch = useDispatch();
+    const tasks = useSelector(tasksSelectors.selectAll);
     const toggleFormVisible = () => {
         setVisibleForm(!visibleForm);
         setInputValue('');
     };
 
-    const addTask = () => {
-        const obj = {
+    const onAddTask = () => {
+        if (!inputValue) {
+            alert('Введите название задачи');
+            return;
+        }
+        if (isValidName(inputValue, tasks)) {
+            alert('Задача уже существует');
+            return;
+        }
+        setIsLoading(true);
+        const data = {
             "listId": list.id,
             "text": inputValue,
             "completed": false
         };
-        setIsLoading(true);
-        axios.post(`${JSON_API}/tasks`, obj).then(({data}) => {
-            onAddTask(list.id, data);
-            setInputValue('');
-            toggleFormVisible();
-        })
-        .catch((e) => {
-            console.log(e);
 
-            alert('Ошибка при добавлении задачи')
-        })
-        .finally(() => {
-            setIsLoading(false)
-        })
+        dispatch(postTask(data));
+        setInputValue('');
+        setIsLoading(false);
+        toggleFormVisible();
     };
 
   return (
@@ -53,7 +56,7 @@ const AddTaskForm = ({onAddTask, list}) => {
             />
             <button 
                 className='button'
-                onClick={addTask} 
+                onClick={onAddTask} 
                 disabled={isLoading}
             >
                 {isLoading ? 'Добавление...' : 'Добавить задачу'}
