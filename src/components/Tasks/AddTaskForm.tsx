@@ -1,19 +1,31 @@
 import React from 'react';
-import addSvg from '../../assets/img/add.svg';
-import { selectors as tasksSelectors } from '../../redux/tasksSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import isValidName from '../../utils/isValidName';
+import { useSelector } from 'react-redux';
+
+import { useAppDispatch } from '../../redux/store';
+import { TaskNew } from "../../redux/tasks/types"
+import { List as ListType } from '../../redux/lists/types';
+import { tasksSelectors } from '../../redux/tasks/tasksSlice';
 import { postTask } from '../../redux/fetchData';
 
-const AddTaskForm = ({ list }) => {
+import { isValidText } from '../../utils/isValidName';
+
+type AddTaskProps = {
+    list: ListType
+}
+const plusSvg: string = require("../../assets/img/add.svg").default;
+
+const AddTaskForm: React.FC<AddTaskProps> = React.memo(({ list }) => {
     const [visibleForm, setVisibleForm] = React.useState(false);
     const [inputValue, setInputValue] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
-    const dispatch = useDispatch();
+    const inputRef = React.useRef<HTMLInputElement>(null)
+    const dispatch = useAppDispatch();
     const tasks = useSelector(tasksSelectors.selectAll);
+    
     const toggleFormVisible = () => {
         setVisibleForm(!visibleForm);
         setInputValue('');
+        inputRef.current?.focus();
     };
 
     const onAddTask = () => {
@@ -21,12 +33,12 @@ const AddTaskForm = ({ list }) => {
             alert('Введите название задачи');
             return;
         }
-        if (isValidName(inputValue, tasks)) {
+        if (isValidText(inputValue, tasks)) {
             alert('Задача уже существует');
             return;
         }
         setIsLoading(true);
-        const data = {
+        const data: TaskNew = {
             "listId": list.id,
             "text": inputValue,
             "completed": false
@@ -42,7 +54,7 @@ const AddTaskForm = ({ list }) => {
     <div className="tasks__form">
         {!visibleForm ? (
             <div onClick={toggleFormVisible} className="tasks__form-new">
-            <img src={addSvg} alt="Add icon" />
+            <img src={plusSvg} alt="Add icon" />
             <span>Новая задача</span>
         </div>
         ) : (
@@ -52,6 +64,7 @@ const AddTaskForm = ({ list }) => {
                 type="text" 
                 placeholder="Текст задачи"
                 value={inputValue}
+                ref={inputRef}
                 onChange={(e) => setInputValue(e.target.value)}
             />
             <button 
@@ -67,10 +80,8 @@ const AddTaskForm = ({ list }) => {
                 >Отмена</button>
         </div>
         )}
-        
-        
     </div>
   )
-};
+});
 
 export default AddTaskForm;

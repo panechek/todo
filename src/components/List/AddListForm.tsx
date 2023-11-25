@@ -1,27 +1,28 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { ReactComponent as Plus} from '../../assets/img/plus.svg';
-import {
-    selectors as listsSelectors
-} from "../../redux/listsSlice";
+import { useSelector } from "react-redux";
+import { colorsSelectors, listsSelectors } from "../../redux/lists/listsSlice";
+import { postList } from "../../redux/fetchData";
+import { ListNew } from "../../redux/lists/types";
 
 import Badge from "./Badge";
-import { ReactComponent as CloseSvg } from '../../assets/img/close.svg';
 
 import isValidName from "../../utils/isValidName";
-import { postList } from "../../redux/fetchData";
+import { useAppDispatch } from "../../redux/store";
 
-const AddListForm = () => {
+const plusSvg: string = require("../../assets/img/add.svg").default;
+const closeSvg: string = require("../../assets/img/remove.svg").default;
+
+const AddListForm: React.FC = () => {
   const [visiblePopup, setVisiblePopup] = React.useState(false);
   const [selectedColor, selectColor] = React.useState(1);
   const [isloading, setIsLoading] = React.useState(false);
   const [inputValue, setInputValue] = React.useState('');
-  const colors = useSelector((state) => state.lists.colors);
-  const dispatch = useDispatch();
+  const colors = useSelector(colorsSelectors);
+  const dispatch = useAppDispatch();
   const lists = useSelector(listsSelectors.selectAll);
 
   React.useEffect(() => {
-    if (colors.lenght > 0) {
+    if (colors.length > 0) {
       selectColor(colors[0].id)
     }
   }, [colors]);
@@ -43,7 +44,7 @@ const AddListForm = () => {
     }
     setIsLoading(true);
        
-    const data = {
+    const data: ListNew = {
       name: inputValue, 
       colorId: selectedColor,
     };
@@ -58,7 +59,7 @@ const AddListForm = () => {
       <ul className="list todo__sidebar_list">
         <li className='list__add-button'>
           <i>
-            <Plus />
+            <img src={plusSvg} alt="Add list" />
           </i>
           <span onClick={() => setVisiblePopup(true)}>
             Добавить список
@@ -66,7 +67,9 @@ const AddListForm = () => {
         </li>
       </ul>
       {visiblePopup && <div className="add-list__popup">
-        <CloseSvg
+        <img
+          src={closeSvg}
+          alt="Close add form"
           className="add-list__popup-close-svg" 
           onClick={onClose}
         />

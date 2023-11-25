@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   Routes, 
   Route, 
@@ -12,38 +12,44 @@ import {
   Tasks
 } from './components';
 import {
-  selectors as listsSelectors,
+  currentListSelector,
+  listsErrorSelector,
+  listsSelectors,
   removeError as removeListsError
-} from "./redux/listsSlice";
+} from "./redux/lists/listsSlice";
 import './scss/index.scss';
-import editServer from "./api";
+import { editListsServer, editTasksServer } from "./api";
 import {
   removeError as removeTasksError,
-  selectors as tasksSelectors
-} from "./redux/tasksSlice";
+  tasksErrorSelector,
+  tasksSelectors
+} from "./redux/tasks/tasksSlice";
 import ListTitle from "./components/List/ListTitle";
+import { List as ListType } from "./redux/lists/types";
+import {Task as TaskType} from "./redux/tasks/types";
+import { useAppDispatch } from "./redux/store";
 
-function App() {
+const App: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const lists = useSelector(listsSelectors.selectAll);
-  const tasks = useSelector(tasksSelectors.selectAll);
+  const dispatch = useAppDispatch();
+  const lists: ListType[] = useSelector(listsSelectors.selectAll);
+  const tasks: TaskType[] = useSelector(tasksSelectors.selectAll);
   const [openMenu, setOpenMenu] = React.useState(true);
 
-  const currentList = useSelector((state) => state.lists.currentList);
+  const currentList = useSelector(currentListSelector);
   const activeList = lists.find((i) => i.id === currentList);
-  const tasksError = useSelector((state) => state.tasks.error);
-  const listsError = useSelector((state) => state.lists.error);
+  const tasksError = useSelector(tasksErrorSelector);
+  const listsError = useSelector(listsErrorSelector);
 
   React.useEffect(() => {
     const checkData = async () => {
     const savedLists = localStorage.getItem('lists');
-    savedLists && await editServer('lists', JSON.parse(savedLists));
+    savedLists && await editListsServer(JSON.parse(savedLists));
     const savedTasks = localStorage.getItem('tasks');
-    savedTasks && await editServer('tasks', JSON.parse(savedTasks));
+    savedTasks && await editTasksServer(JSON.parse(savedTasks));
     localStorage.removeItem('lists');
     localStorage.removeItem('tasks');
-    await dispatch(fetchData());
+    dispatch(fetchData());
   } 
   checkData();
   
@@ -52,7 +58,7 @@ function App() {
   React.useEffect(() => {
     if(listsError) {
       
-       const isError = editServer('lists', lists);
+       const isError = editListsServer(lists);
        if(!isError){
         localStorage.removeItem('lists')
         dispatch(removeListsError());
@@ -62,7 +68,7 @@ function App() {
     }
     if(tasksError) {
      
-       const result = editServer('tasks', tasks);
+       const result = editTasksServer(tasks);
        if(!result) {
         localStorage.removeItem('tasks')
         dispatch(removeTasksError())
@@ -89,7 +95,7 @@ function App() {
       <div className="todo__tasks">
         <div className="todo__list">
           <Routes>
-            <Route exact path="/" element=
+            <Route path="/" element=
               {lists &&
                 lists.map((list) => (
                   <Tasks 

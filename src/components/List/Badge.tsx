@@ -1,7 +1,12 @@
 import classNames from "classnames";
-import React from "react";
 
-const Badge = ({color, onClick, className}) => (
+type ColorProps = {
+    color: string,
+    className?: false | 'active',
+    onClick: () => void
+}
+
+const Badge: React.FC<ColorProps> = ({color, onClick, className}) => (
     <i
         onClick={onClick}
         className={classNames('badge', { [`badge--${color}`]: color }, className)}

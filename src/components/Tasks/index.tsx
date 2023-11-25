@@ -1,22 +1,30 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { selectors as tasksSelectors } from '../../redux/tasksSlice';
-import penSvg from '../../assets/img/pen.svg';
+import { tasksSelectors } from '../../redux/tasks/tasksSlice';
 import AddTaskForm from './AddTaskForm';
 import Task from './Task';
 import isValidName from '../../utils/isValidName';
-import { selectors as listsSelector } from '../../redux/listsSlice';
+import { colorsSelectors, listsSelectors } from '../../redux/lists/listsSlice';
 import { patchList } from '../../redux/fetchData';
+import { List as ListType} from '../../redux/lists/types';
+import { useAppDispatch } from '../../redux/store';
 
-const Tasks = ({ 
+type TasksProps = {
+  list: ListType,
+  withoutEmpty?: boolean
+}
+
+const penSvg: string = require("../../assets/img/pen.svg").default;
+
+const Tasks: React.FC<TasksProps> = ({ 
   list, 
   withoutEmpty,
 }) => {
-  const dispatch = useDispatch();
-  const tasks = useSelector(tasksSelectors.selectAll).filter((task) => task.listId === list.id);
-  const color = useSelector((state) => state.lists.colors).find((i) => i.id === list.colorId);
-  const lists = useSelector(listsSelector.selectAll);
+  const dispatch = useAppDispatch();
+  const tasks = useSelector(tasksSelectors.selectAll).filter((i) => i.listId === list.id);
+  const color = useSelector(colorsSelectors).find((i) => i.id === list.colorId);
+  const lists = useSelector(listsSelectors.selectAll);
 
   const editTitle = () => {
     const name = window.prompt('Название списка', list.name);
@@ -36,9 +44,11 @@ const Tasks = ({
       {list ? (
         <div className="tasks">
         <Link to={`/lists/${list.id}`}>
-        <h2 style={{ color: color.hex }} className="tasks__title">
+        <h2 style={{ color: color?.hex }} className="tasks__title">
           {list.name}
-          <img onClick={editTitle} src={penSvg} alt="Edit icon" />
+          <div onClick={editTitle}>          
+            <img src={penSvg} alt="Edit list" />
+          </div>
         </h2>
       </Link>
         <div className="tasks__items">
@@ -49,7 +59,6 @@ const Tasks = ({
             tasks.map(task => (
               <Task
                 key={task.id}
-                list={list}
                 {...task}
               />
             ))

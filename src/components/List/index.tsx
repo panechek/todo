@@ -1,27 +1,35 @@
 import React from "react";
 import classNames from "classnames";
 import { deleteList } from "../../redux/fetchData";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import removeSvg from '../../assets/img/remove.svg';
 import Badge from "./Badge";
 import Sceleton from "./Sceletons";
-import { changeCurrentList } from "../../redux/listsSlice";
-import { selectors as listsSelectors } from "../../redux/listsSlice";
-import { selectors as tasksSelectors } from "../../redux/tasksSlice";
+import { changeCurrentList, colorsSelectors, currentListSelector } from "../../redux/lists/listsSlice";
+import { listsSelectors } from "../../redux/lists/listsSlice";
+import { tasksSelectors } from "../../redux/tasks/tasksSlice";
+import { Color as ColorType} from "../../redux/lists/types";
+import { useAppDispatch } from "../../redux/store";
 
-const List = ({ openMenu, setOpenMenu }) => {
-    const dispatch = useDispatch();
+const removeSvg: string = require("../../assets/img/remove.svg").default;
+
+type ListProps = {
+    openMenu: boolean,
+    setOpenMenu: (openMenu: boolean) => void
+}
+
+const List: React.FC<ListProps> = ({ openMenu, setOpenMenu }) => {
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const colors = useSelector((state) => state.lists.colors);
-    const getColor = (id) => colors.find((i) => i.id === id).name;
+    const colors: ColorType[] = useSelector(colorsSelectors);
+    const getColor = (id: number):string | undefined => colors.find((i) => i?.id === id)?.name;
     const lists = useSelector(listsSelectors.selectAll);
     const tasks = useSelector(tasksSelectors.selectAll);
-    const currentList = useSelector((state) => state.lists.currentList);
+    const currentList = useSelector(currentListSelector);
     const sceletons = [...new Array(6)].map((_, index) => <Sceleton key={index} />);
 
-    const onRemoveList = (id) => {
+    const onRemoveList = (id: number) => {
         if (window.confirm('Вы уверены, что хотите удалить?')) {
             dispatch(deleteList(id));
             navigate('/');
@@ -32,15 +40,16 @@ const List = ({ openMenu, setOpenMenu }) => {
             {lists.length > 0 ? lists.map((list, index) => (
                 <li 
                     key={index} 
-                    className={classNames(list.className, {
-                        active: list.active 
-                            ? list.active 
-                            : currentList === list.id,
+                    className={classNames({
+                        active: currentList === list.id,
                             hidden: openMenu
                         })}
                 >
                     <i>
-                        <Badge color={getColor(list.colorId)} />
+                        <Badge
+                            color={getColor(list?.colorId) ?? 'white'}
+                            onClick={() => null}
+                            />
                     </i>
                     <span
                         onClick={() => {
