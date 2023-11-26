@@ -1,3 +1,4 @@
+import React from "react";
 import classNames from "classnames";
 
 type ColorProps = {
@@ -6,7 +7,7 @@ type ColorProps = {
     onClick: () => void
 }
 
-const Badge: React.FC<ColorProps> = ({color, onClick, className}) => (
+const Badge: React.FunctionComponent<ColorProps> = ({color, onClick, className}) => (
     <i
         onClick={onClick}
         className={classNames('badge', { [`badge--${color}`]: color }, className)}
