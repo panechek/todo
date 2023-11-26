@@ -15,9 +15,9 @@ type AddTaskProps = {
 const plusSvg: string = require("../../assets/img/add.svg").default;
 
 const AddTaskForm: React.FC<AddTaskProps> = React.memo(({ list }) => {
-    const [visibleForm, setVisibleForm] = React.useState(false);
-    const [inputValue, setInputValue] = React.useState('');
-    const [isLoading, setIsLoading] = React.useState(false);
+    const [visibleForm, setVisibleForm] = React.useState<boolean>(false);
+    const [inputValue, setInputValue] = React.useState<string>('');
+    const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const inputRef = React.useRef<HTMLInputElement>(null)
     const dispatch = useAppDispatch();
     const tasks = useSelector(tasksSelectors.selectAll);
@@ -39,7 +39,7 @@ const AddTaskForm: React.FC<AddTaskProps> = React.memo(({ list }) => {
         }
         setIsLoading(true);
         const data: TaskNew = {
-            "listId": list.id,
+            "listId": Number(list.id),
             "text": inputValue,
             "completed": false
         };

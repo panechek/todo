@@ -13,10 +13,10 @@ const plusSvg: string = require("../../assets/img/add.svg").default;
 const closeSvg: string = require("../../assets/img/remove.svg").default;
 
 const AddListForm: React.FC = () => {
-  const [visiblePopup, setVisiblePopup] = React.useState(false);
-  const [selectedColor, selectColor] = React.useState(1);
-  const [isloading, setIsLoading] = React.useState(false);
-  const [inputValue, setInputValue] = React.useState('');
+  const [visiblePopup, setVisiblePopup] = React.useState<boolean>(false);
+  const [selectedColor, selectColor] = React.useState<number>(1);
+  const [isloading, setIsLoading] = React.useState<boolean>(false);
+  const [inputValue, setInputValue] = React.useState<string>('');
   const colors = useSelector(colorsSelectors);
   const dispatch = useAppDispatch();
   const lists = useSelector(listsSelectors.selectAll);

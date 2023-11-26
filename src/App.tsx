@@ -34,7 +34,7 @@ const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const lists: ListType[] = useSelector(listsSelectors.selectAll);
   const tasks: TaskType[] = useSelector(tasksSelectors.selectAll);
-  const [openMenu, setOpenMenu] = React.useState(true);
+  const [openMenu, setOpenMenu] = React.useState<boolean>(true);
 
   const currentList = useSelector(currentListSelector);
   const activeList = lists.find((i) => i.id === currentList);
