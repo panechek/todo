@@ -29,31 +29,6 @@
       "completed": true
     },
     {
-      "id": 1,
-      "name": "Покупки",
-      "colorId": 5
-    },
-    {
-      "id": 5,
-      "name": "Здоровье",
-      "colorId": 1
-    },
-    {
-      "name": "Спорт",
-      "colorId": 6,
-      "id": 6
-    },
-    {
-      "name": "Дети",
-      "colorId": 1,
-      "id": 7
-    },
-    {
-      "name": "bnm",
-      "colorId": 1,
-      "id": 10
-    },
-    {
       "listId": 1,
       "text": "Молоко",
       "completed": false,

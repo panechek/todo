@@ -57,7 +57,6 @@ const App: React.FC = () => {
   }, []);
   React.useEffect(() => {
     if(listsError) {
-      
        const isError = editListsServer(lists);
        if(!isError){
         localStorage.removeItem('lists')
@@ -67,7 +66,6 @@ const App: React.FC = () => {
       }
     }
     if(tasksError) {
-     
        const result = editTasksServer(tasks);
        if(!result) {
         localStorage.removeItem('tasks')
