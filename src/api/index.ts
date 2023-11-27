@@ -31,8 +31,9 @@ export const editListsServer = async (dataApp: List[]) => {
 
             } else if (!appElem) {
                 return deleteList(element);
-            }
+            } else if (!serverElem) {
             return addList(appElem);
+            }
         });
     } catch(e) {
         error = true;
@@ -49,7 +50,7 @@ export const editTasksServer = async (dataApp: Task[]) => {
 
         const idsUniq = Array.from(new Set([...idsServer, ...idsApp]));
 
-        idsUniq.forEach(element => {
+        await idsUniq.forEach(element => {
             const serverElem: Task | undefined = data.find((i) => i.id === element);
             const appElem: Task | undefined = dataApp.find((i) => i.id === element);
             if (serverElem && appElem) {
@@ -60,8 +61,9 @@ export const editTasksServer = async (dataApp: Task[]) => {
                 }
             } else if (!appElem) {
                 return deleteTask(element);
-            }
+            } else if (!serverElem) {
             return addTask(appElem);
+        }
         });
     } catch(e) {
     error = true;
