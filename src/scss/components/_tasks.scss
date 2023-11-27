@@ -15,6 +15,7 @@
       color: #64c4ed;
       border-bottom: 1px solid #f2f2f2;
       padding-bottom: 20px;
+      display: flex;
 
       &:hover {
         img {
@@ -79,7 +80,7 @@
           left: 50%;
           top: 50%;
 
-          @include laptop {
+          @include mobile {
             left: 10px;
           }
         }

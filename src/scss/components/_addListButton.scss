@@ -11,7 +11,7 @@
        top: -25px;
        left: 10px;
 
-        @include laptop {
+        @include mobile {
             position: fixed;
             top: 65px;
         }

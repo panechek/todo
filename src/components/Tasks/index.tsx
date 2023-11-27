@@ -43,14 +43,14 @@ const Tasks: React.FC<TasksProps> = ({
     <>
       {list ? (
         <div className="tasks">
-        <Link to={`/lists/${list.id}`}>
-        <h2 style={{ color: color?.hex }} className="tasks__title">
-          {list.name}
-          <div onClick={editTitle}>          
-            <img src={penSvg} alt="Edit list" />
-          </div>
-        </h2>
-      </Link>
+          <Link to={`/lists/${list.id}`}>
+          <h2 style={{ color: color?.hex }} className="tasks__title">
+            {list.name}
+            <div onClick={editTitle}>          
+              <img src={penSvg} alt="Edit list" />
+            </div>
+          </h2>
+          </Link>
         <div className="tasks__items">
           {!withoutEmpty && tasks && !tasks.length && (
             <h2>Задачи отсутствуют</h2>
