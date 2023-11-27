@@ -78,7 +78,7 @@ const App: React.FC = () => {
   }, [tasksError, listsError, lists, tasks, dispatch])
 
   React.useEffect(() => {
-    currentList ? navigate(`/lists/${currentList}`) : navigate('/')
+    currentList ? navigate(`/list/${currentList}`) : navigate('/')
    }, [currentList, navigate]);
 
    return (
@@ -104,7 +104,7 @@ const App: React.FC = () => {
                 ))
               }
             />
-            <Route path='/lists/:id' element=
+            <Route path='/list/:id' element=
               {lists && activeList ? (
               <Tasks 
               list={activeList}
