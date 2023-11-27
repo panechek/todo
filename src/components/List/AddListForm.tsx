@@ -9,8 +9,6 @@ import Badge from "./Badge";
 import isValidName from "../../utils/isValidName";
 import { useAppDispatch } from "../../redux/store";
 
-const plusSvg: string = require("../../assets/img/add.svg").default;
-const closeSvg: string = require("../../assets/img/remove.svg").default;
 
 const AddListForm: React.FC = () => {
   const [visiblePopup, setVisiblePopup] = React.useState<boolean>(false);
@@ -20,6 +18,8 @@ const AddListForm: React.FC = () => {
   const colors = useSelector(colorsSelectors);
   const dispatch = useAppDispatch();
   const lists = useSelector(listsSelectors.selectAll);
+  const plusSvg: string = React.useMemo(() => require("../../assets/img/add.svg").default, []);
+  const closeSvg: string = React.useMemo(() => require("../../assets/img/remove.svg").default, []);
 
   React.useEffect(() => {
     if (colors.length > 0) {

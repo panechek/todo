@@ -11,7 +11,6 @@ import { tasksSelectors } from "../../redux/tasks/tasksSlice";
 import { Color as ColorType} from "../../redux/lists/types";
 import { useAppDispatch } from "../../redux/store";
 
-const removeSvg: string = require("../../assets/img/remove.svg").default;
 
 type ListProps = {
     openMenu: boolean,
@@ -28,6 +27,7 @@ const List: React.FC<ListProps> = ({ openMenu, setOpenMenu }) => {
     const tasks = useSelector(tasksSelectors.selectAll);
     const currentList = useSelector(currentListSelector);
     const sceletons = [...new Array(6)].map((_, index) => <Sceleton key={index} />);
+    const removeSvg: string = React.useMemo(() => require("../../assets/img/remove.svg").default, []);
 
     const onRemoveList = (id: number) => {
         if (window.confirm('Вы уверены, что хотите удалить?')) {

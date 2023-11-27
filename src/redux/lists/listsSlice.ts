@@ -56,8 +56,8 @@ const listsSlice = createSlice({
             .addCase(postList.rejected, (state, action: PayloadAction<ListNew | undefined>) => {
                 if(action.payload) {
                     const { name, colorId } = action.payload;
-                    const listIds: (number | undefined)[]  = (Object.values(state.entities).map((list) => list?.id));
-                    const newId: number = listIds ? Number(listIds.pop) + 1 : 1;
+                    const listIds: (number | undefined)[] = (Object.values(state.entities).map((list) => list?.id));
+                    const newId: number = listIds ? Number(listIds.pop()) + 1 : 1;
                     const newList = {
                         name,
                         colorId,

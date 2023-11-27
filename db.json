@@ -72,7 +72,7 @@
     {
       "listId": 1,
       "text": "Мясо",
-      "completed": false,
+      "completed": true,
       "id": 18
     },
     {
@@ -80,6 +80,12 @@
       "text": "Прогулка",
       "completed": false,
       "id": 19
+    },
+    {
+      "listId": 5,
+      "text": "Игрушки",
+      "completed": true,
+      "id": 20
     }
   ],
   "colors": [

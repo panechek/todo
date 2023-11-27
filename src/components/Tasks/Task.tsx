@@ -14,9 +14,7 @@ export type TaskProps = {
   key: number
 }
 
-const penSvg: string = require("../../assets/img/pen.svg").default;
-const removeSvg: string = require("../../assets/img/remove.svg").default;
-const checkSvg: string = require("../../assets/img/check.svg").default;
+
 
 const Task: React.FC<TaskProps> = ({
   id,
@@ -25,6 +23,9 @@ const Task: React.FC<TaskProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const tasks = useSelector(tasksSelectors.selectAll);
+  const penSvg: string = React.useMemo(() => require("../../assets/img/pen.svg").default, []);
+  const removeSvg: string = React.useMemo(() => require("../../assets/img/remove.svg").default, []);
+  const checkSvg: string = React.useMemo(() => require("../../assets/img/check.svg").default, []);
 
   const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     onCompleteTask(id, e.target.checked);

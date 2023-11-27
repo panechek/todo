@@ -12,7 +12,6 @@ import { isValidText } from '../../utils/isValidName';
 type AddTaskProps = {
     list: ListType
 }
-const plusSvg: string = require("../../assets/img/add.svg").default;
 
 const AddTaskForm: React.FC<AddTaskProps> = React.memo(({ list }) => {
     const [visibleForm, setVisibleForm] = React.useState<boolean>(false);
@@ -21,7 +20,8 @@ const AddTaskForm: React.FC<AddTaskProps> = React.memo(({ list }) => {
     const inputRef = React.useRef<HTMLInputElement>(null)
     const dispatch = useAppDispatch();
     const tasks = useSelector(tasksSelectors.selectAll);
-    
+    const plusSvg: string = React.useMemo(() => require("../../assets/img/add.svg").default, []);
+
     const toggleFormVisible = () => {
         setVisibleForm(!visibleForm);
         setInputValue('');

@@ -15,7 +15,6 @@ type TasksProps = {
   withoutEmpty?: boolean
 }
 
-const penSvg: string = require("../../assets/img/pen.svg").default;
 
 const Tasks: React.FC<TasksProps> = ({ 
   list, 
@@ -25,6 +24,7 @@ const Tasks: React.FC<TasksProps> = ({
   const tasks = useSelector(tasksSelectors.selectAll).filter((i) => i.listId === list.id);
   const color = useSelector(colorsSelectors).find((i) => i.id === list.colorId);
   const lists = useSelector(listsSelectors.selectAll);
+  const penSvg: string = React.useMemo(() => require("../../assets/img/pen.svg").default, []);
 
   const editTitle = () => {
     const name = window.prompt('Название списка', list.name);
