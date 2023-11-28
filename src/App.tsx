@@ -4,6 +4,7 @@ import {
   Routes, 
   Route, 
   useNavigate,
+  Link,
  } from "react-router-dom";
 import { fetchData } from "./redux/fetchData";
 import {
@@ -78,7 +79,7 @@ const App: React.FC = () => {
   }, [tasksError, listsError, lists, tasks, dispatch])
 
   React.useEffect(() => {
-    currentList ? navigate(`/list/${currentList}`) : navigate('/')
+    currentList ? navigate(`/lists/${currentList}`) : navigate('/')
    }, [currentList, navigate]);
 
    return (
@@ -104,12 +105,13 @@ const App: React.FC = () => {
                 ))
               }
             />
-            <Route path='/list/:id' element=
+            <Route path='/lists/:id' element=
               {lists && activeList ? (
               <Tasks 
               list={activeList}
               />) : null}
-            />
+              />
+              <Route path='/*' element={<div>Not found, <Link to='/'>return</Link></div>} />
           </Routes>
         </div>
       </div>
